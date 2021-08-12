@@ -1,0 +1,61 @@
+<app-navbar></app-navbar>
+
+
+    <div class="container">
+
+      <div class="my-5"><h2>Edit Blog Details</h2></div>
+
+      <div class="Form">
+        <form #userlogin = "ngForm" (ngSubmit) = "onUpdate(userlogin.value)" class="needs-validation">
+          <!-- <input [(ngmodel)]="updatedetails.Title" type="text">   -->
+          <div class="form-group my-2">
+            <label for="title">Title</label>
+            <input type = "text"  name ="title" placeholder= "Enter title" class="form-control" [(ngModel)]="updatedetails.Title" required>
+            <div class="valid-feedback">Valid title.</div>
+            <div class="invalid-feedback">Please fill out this field.</div>
+          </div>   
+
+          <div class="form-group my-2">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" name = "des" placeholder= "Enter description"  [(ngModel)]="updatedetails.Description" required></textarea>
+            <div class="valid-feedback">Valid title.</div>
+            <div class="invalid-feedback">Please fill out this field.</div>
+          </div>   
+          
+          <div class="form-group my-2">
+            <label for="type">Visible Type</label>
+            <div class="form-group input-group mb-3">
+                <label class="input-group-text">Options</label>
+                <select class="form-select" name="options"  [(ngModel)]="updatedetails.Type" required>
+                  <option value="Public">Public</option>
+                  <option value="Private">Private</option>
+                </select>
+            </div>
+          </div>
+
+          <div class="form-group my-2">
+            <label for="image">Upload Image</label>
+            {{imageError}}
+            <input type = "file" (change)="onFileChange($event)" name ="image" class="form-control" ngModel multiple="">
+            <div class="container row">
+              <div class="img-space col-lg-4 col-md-6 col-sm-12" *ngFor="let url of imageArray;">
+
+                <ng-container *ngIf="isImageSaved; else elseTemplate">
+                    <img [src]="url" [width]="imgObj.width" [height]="imgObj.height"/>
+                </ng-container>
+                <ng-template #elseTemplate>
+                    <img src="" class="img-responsive">
+                </ng-template>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="d-grid col-2 mx-start my-3">
+            <button type="submit" value = "submit" class="btn btn-dark btn-lg"> Update </button>
+          </div>
+        </form>
+      </div>
+  
+    </div>
+ 
